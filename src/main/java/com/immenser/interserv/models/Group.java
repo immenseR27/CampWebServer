@@ -1,5 +1,6 @@
 package com.immenser.interserv.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,7 +14,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "group")
+@Table(name = "_group")
 public class Group {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,14 +22,15 @@ public class Group {
 
     private int number;
 
-    @OneToOne(fetch = FetchType.EAGER)
-    private User user;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "group")
+    private List<User> user;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "group")
+    @JsonManagedReference
     private List<Child> children;
 
-    public Group(User user, List<Child> children) {
-        this.user = user;
-        this.children = children;
-    }
+//    public Group(User user, List<Child> children) {
+//        this.user = user;
+//        this.children = children;
+//    }
 }
