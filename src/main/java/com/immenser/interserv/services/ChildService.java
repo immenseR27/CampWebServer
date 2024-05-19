@@ -20,8 +20,6 @@ public class ChildService {
 
     public List<Child> findByUser(Long userId) {
         Group group = groupService.find(userId);
-        List<Child> children = childRepository.findByGroup(group);
-        System.out.println(children.get(0).getSurname());
         return childRepository.findByGroup(group);
     }
 

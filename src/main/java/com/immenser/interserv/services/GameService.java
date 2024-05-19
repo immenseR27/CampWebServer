@@ -16,6 +16,10 @@ public class GameService {
         return gameRepository.findAll();
     }
 
+    public List<Game> findByUser(Long userId) {
+        return gameRepository.findAll();
+    }
+
     public Game findGame(Long id) {
         return gameRepository.findById(id).orElseThrow();
     }

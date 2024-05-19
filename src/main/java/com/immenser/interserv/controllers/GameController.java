@@ -21,6 +21,11 @@ public class GameController {
         return gameService.findAll();
     }
 
+    @GetMapping
+    public List<Game> findByUser(@PathVariable Long id) {
+        return gameService.findByUser(id);
+    }
+
     @GetMapping("/{id}")
     public Game findGame(@PathVariable Long id) {
         return gameService.findGame(id);
