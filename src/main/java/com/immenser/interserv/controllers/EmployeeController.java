@@ -1,7 +1,7 @@
 package com.immenser.interserv.controllers;
 
-import com.immenser.interserv.models.User;
-import com.immenser.interserv.services.UserService;
+import com.immenser.interserv.models.Employee;
+import com.immenser.interserv.services.EmployeeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/users")
 @RequiredArgsConstructor
-public class UserController {
-    private final UserService userService;
+public class EmployeeController {
+    private final EmployeeService employeeService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> findUser(@PathVariable Long id) {
-        User user = userService.findUser(id);
-        return ResponseEntity.ok(user);
+    public ResponseEntity<Employee> findEmployee(@PathVariable Long id) {
+        Employee employee = employeeService.findEmployee(id);
+        return ResponseEntity.ok(employee);
     }
 
 //    @PatchMapping("/edit/{id}")

@@ -2,7 +2,7 @@ package com.immenser.interserv.controllers;
 
 import com.immenser.interserv.dto.JwtTokenResponse;
 import com.immenser.interserv.dto.UserLoginDto;
-import com.immenser.interserv.models.User;
+import com.immenser.interserv.models.Employee;
 import com.immenser.interserv.services.AuthorizationService;
 //import com.immenser.interserv.util.errors.user.UserNotExistsValidator;
 import lombok.RequiredArgsConstructor;
@@ -22,10 +22,10 @@ public class AuthorizationController {
 //    private final UserNotExistsValidator userNotExistsValidator;
 
     @PostMapping("/register")
-    public ResponseEntity<JwtTokenResponse> register(@RequestBody User user, BindingResult bindingResult) {
+    public ResponseEntity<JwtTokenResponse> register(@RequestBody Employee employee, BindingResult bindingResult) {
 //        userNotExistsValidator.validate(user, bindingResult);
 //        returnErrorsIfContains(bindingResult, new MyException(""));
-        return new ResponseEntity<>(authorizationService.saveUserAndReturnJwtResponse(user), HttpStatus.CREATED);
+        return new ResponseEntity<>(authorizationService.saveUserAndReturnJwtResponse(employee), HttpStatus.CREATED);
     }
 
     @PostMapping("/login")

@@ -18,10 +18,10 @@ public class ChildService {
         return childRepository.findAll();
     }
 
-    public List<Child> findByUser(Long userId) {
-        Group group = groupService.find(userId);
-        return childRepository.findByGroup(group);
-    }
+//    public List<Child> findByUser(Long userId) {
+//        Group group = groupService.find(userId);
+//        return childRepository.findByGroup(group);
+//    }
 
     public Child findChild(Long id) {
         return childRepository.findById(id).orElseThrow();

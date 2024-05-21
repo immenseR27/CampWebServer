@@ -10,8 +10,8 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Base64;
+import java.util.List;
 
 @Entity
 @Getter
@@ -21,17 +21,21 @@ import java.util.Base64;
 @Table(name = "child")
 public class Child extends Person {
 
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "children")
+    List<Parent> parents;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "child")
+    private List<ChildPeriod> tickets;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "child")
+    List<Inventory> inventory;
+
     private String image;
 
     @Transient
     @JsonSerialize
     @JsonDeserialize
     String base64img;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "group_id", nullable = false)
-    @JsonBackReference
-    private Group group;
 
     @PostLoad
     void getBytesFromImage() {

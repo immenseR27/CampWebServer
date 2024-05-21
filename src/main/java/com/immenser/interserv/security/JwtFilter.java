@@ -1,7 +1,7 @@
 package com.immenser.interserv.security;
 
 import com.auth0.jwt.exceptions.JWTVerificationException;
-import com.immenser.interserv.repositories.UserRepository;
+import com.immenser.interserv.repositories.EmployeeRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -16,15 +16,12 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
-/**
- * @author Vlad Utts
- */
 @Component
 @RequiredArgsConstructor
 public class JwtFilter extends OncePerRequestFilter {
     private final JwtUtil jwtUtil;
-    private final UserDetailsServiceImpl userDetailsService;
-    private final UserRepository userRepository;
+    private final EmployeeDetailsServiceImpl employeeDetailsService;
+    private final EmployeeRepository employeeRepository;
 
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest,
@@ -42,7 +39,7 @@ public class JwtFilter extends OncePerRequestFilter {
             } else {
                 try {
                     String email = jwtUtil.validateAccessTokenAndRetrieveClaim(jwt);
-                    UserDetails userDetails = userDetailsService.loadUserByUsername(email);
+                    UserDetails userDetails = employeeDetailsService.loadUserByUsername(email);
                     UsernamePasswordAuthenticationToken authToken =
                             new UsernamePasswordAuthenticationToken(userDetails,
                                     userDetails.getPassword(),

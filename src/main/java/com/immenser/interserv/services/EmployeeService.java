@@ -1,7 +1,7 @@
 package com.immenser.interserv.services;
 
-import com.immenser.interserv.models.User;
-import com.immenser.interserv.repositories.UserRepository;
+import com.immenser.interserv.models.Employee;
+import com.immenser.interserv.repositories.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -9,11 +9,11 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class UserService {
-    private final UserRepository userRepository;
+public class EmployeeService {
+    private final EmployeeRepository employeeRepository;
 
-    public User findUser(Long id) {
-        Optional<User> optionalUser = userRepository.findById(id);
+    public Employee findEmployee(Long id) {
+        Optional<Employee> optionalUser = employeeRepository.findById(id);
         return optionalUser.orElseThrow();
     }
 

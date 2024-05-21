@@ -6,7 +6,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.immenser.interserv.dto.JwtTokenResponse;
-import com.immenser.interserv.models.User;
+import com.immenser.interserv.models.Employee;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -27,37 +27,37 @@ public class JwtUtil {
     private static final String ID = "id";
     private static final String ISSUER = "ConcreteIssuer";
 
-    private String generateAccessToken(User user) {
+    private String generateAccessToken(Employee employee) {
         Date issuedDate = new Date();
         Date expirationDate = Date.from(ZonedDateTime.now().plusHours(1).toInstant());
 
         return JWT.create()
                 .withSubject(USER_DETAILS)
-                .withClaim(ID, user.getId())
-                .withClaim(EMAIL, user.getEmail())
+                .withClaim(ID, employee.getId())
+                .withClaim(EMAIL, employee.getEmail())
                 .withIssuedAt(issuedDate)
                 .withIssuer(ISSUER)
                 .withExpiresAt(expirationDate)
                 .sign(Algorithm.HMAC256(accessSecret));
     }
 
-    private String generateRefreshToken(User user) {
+    private String generateRefreshToken(Employee employee) {
         Date issuedDate = new Date();
         Date expirationDate = Date.from(ZonedDateTime.now().plusHours(3).toInstant());
 
         return JWT.create()
                 .withSubject(USER_DETAILS)
-                .withClaim(ID, user.getId())
-                .withClaim(EMAIL, user.getEmail())
+                .withClaim(ID, employee.getId())
+                .withClaim(EMAIL, employee.getEmail())
                 .withIssuedAt(issuedDate)
                 .withIssuer(ISSUER)
                 .withExpiresAt(expirationDate)
                 .sign(Algorithm.HMAC256(refreshSecret));
     }
 
-    public JwtTokenResponse generateJWTResponse(User user) {
-        return new JwtTokenResponse(generateAccessToken(user),
-                generateRefreshToken(user));
+    public JwtTokenResponse generateJWTResponse(Employee employee) {
+        return new JwtTokenResponse(generateAccessToken(employee),
+                generateRefreshToken(employee));
     }
 
     public String validateAccessTokenAndRetrieveClaim(String token) {

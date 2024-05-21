@@ -19,10 +19,10 @@ public class ChildController {
         return childService.findAll();
     }
 
-    @GetMapping("/{id}")
-    public List<Child> findByUser(@PathVariable Long id) {
-        return childService.findByUser(id);
-    }
+//    @GetMapping("/{id}")
+//    public List<Child> findByUser(@PathVariable Long id) {
+//        return childService.findByUser(id);
+//    }
 
 //    @GetMapping("/{id}")
 //    public Child findChild(@PathVariable Long id) {

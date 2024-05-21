@@ -1,6 +1,4 @@
 package com.immenser.interserv.models;
-
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,15 +20,18 @@ public class Group {
 
     private int number;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "group")
-    private List<User> user;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "age_id")
+    private Age age;
+
+    @OneToOne(fetch = FetchType.EAGER, mappedBy = "group")
+    private ChildPeriod childPeriod;
+
+    @OneToOne(fetch = FetchType.EAGER, mappedBy = "group")
+    private EmployeePeriod employeePeriod;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "group")
-    @JsonManagedReference
-    private List<Child> children;
+    private List<GroupActivity> activities;
 
-//    public Group(User user, List<Child> children) {
-//        this.user = user;
-//        this.children = children;
-//    }
+
 }

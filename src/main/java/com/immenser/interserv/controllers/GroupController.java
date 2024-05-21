@@ -21,8 +21,8 @@ public class GroupController {
 //        return ResponseEntity.ok(HttpStatus.OK);
 //    }
 
-    @GetMapping("/{userId}")
-    public List<Child> find(@PathVariable Long userId) {
-        return groupService.find(userId).getChildren();
-    }
+//    @GetMapping("/{userId}")
+//    public List<Child> find(@PathVariable Long userId) {
+//        return groupService.find(userId).getChildren();
+//    }
 }

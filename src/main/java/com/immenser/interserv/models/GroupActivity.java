@@ -1,6 +1,5 @@
 package com.immenser.interserv.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,19 +11,17 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "_user")
-public class User {
+@Table(name = "group_activity")
+public class GroupActivity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String email;
-    private String password;
+    private long id;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "group_id", nullable = false)
-    @JsonBackReference
+    @JoinColumn(name = "group_id")
     private Group group;
-//    private String firstName;
-//    private String lastName;
-//    private String middleName;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "activity_id")
+    private Activity activity;
 }

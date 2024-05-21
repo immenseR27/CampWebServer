@@ -1,7 +1,7 @@
 package com.immenser.interserv.security;
 
-import com.immenser.interserv.models.User;
-import com.immenser.interserv.repositories.UserRepository;
+import com.immenser.interserv.models.Employee;
+import com.immenser.interserv.repositories.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -14,15 +14,15 @@ import java.util.Optional;
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
-public class UserDetailsServiceImpl implements UserDetailsService {
-    private final UserRepository userRepository;
+public class EmployeeDetailsServiceImpl implements UserDetailsService {
+    private final EmployeeRepository employeeRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<User> optionalUser = userRepository.findByEmail(username);
+        Optional<Employee> optionalUser = employeeRepository.findByEmail(username);
         if (optionalUser.isEmpty())
             throw new UsernameNotFoundException("User not found!");
 
-        return new UserDetailsImpl(optionalUser.get());
+        return new EmployeeDetailsImpl(optionalUser.get());
     }
 }

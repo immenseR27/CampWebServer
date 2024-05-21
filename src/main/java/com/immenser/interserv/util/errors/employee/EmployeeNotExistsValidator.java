@@ -1,13 +1,4 @@
-package com.immenser.interserv.util.errors.user;
-
-import com.immenser.interserv.models.User;
-import com.immenser.interserv.security.UserDetailsServiceImpl;
-import jakarta.validation.Validator;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Component;
-import org.springframework.validation.Errors;
+package com.immenser.interserv.util.errors.employee;
 
 
 //@Component
