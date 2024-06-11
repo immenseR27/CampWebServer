@@ -3,10 +3,7 @@ package com.immenser.interserv.controllers;
 import com.immenser.interserv.models.Game;
 import com.immenser.interserv.services.GameService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -14,20 +11,21 @@ import java.util.List;
 @RequestMapping("/games")
 @RequiredArgsConstructor
 public class GameController {
+
     private final GameService gameService;
 
     @GetMapping
-    public List<Game> findAll() {
-        return gameService.findAll();
+    public List<Game> findGamesByAge(@RequestParam("employeeId") long employeeId) {
+        return gameService.findGamesByAge(employeeId);
     }
 
     @GetMapping("/{id}")
-    public List<Game> findByUser(@PathVariable Long id) {
-        return gameService.findByUser(id);
+    public Game findGame(@PathVariable Long id) {
+        return gameService.findGame(id);
     }
 
-//    @GetMapping("/{id}")
-//    public Game findGame(@PathVariable Long id) {
-//        return gameService.findGame(id);
-//    }
+    @PostMapping
+    public void addGame(@RequestBody Game game) {
+        gameService.addGame(game);
+    }
 }

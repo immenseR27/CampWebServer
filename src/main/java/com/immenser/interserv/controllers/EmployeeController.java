@@ -6,10 +6,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/employees")
 @RequiredArgsConstructor
 public class EmployeeController {
+
     private final EmployeeService employeeService;
 
     @GetMapping("/{id}")
@@ -18,9 +21,20 @@ public class EmployeeController {
         return ResponseEntity.ok(employee);
     }
 
-//    @PatchMapping("/edit/{id}")
-//    public ResponseEntity<User> editUser(@PathVariable Long id, @RequestBody UserEditDTO userEditDTO) {
-//        User user = userService.editUser(id, userEditDTO);
-//        return ResponseEntity.ok(user);
-//    }
+    @PostMapping
+    public void addEmployee(@RequestBody Employee employee){
+        employeeService.addEmployee(employee);
+    }
+
+    @GetMapping
+    public List<Employee> findEmployeesByGroupAndPosition(@RequestParam("groupId") long groupId, @RequestParam("position") String position) {
+        return employeeService.findEmployeesByGroupAndPosition(groupId, position);
+    }
+
+    @GetMapping("/free")
+    public List<Employee> findFreeEmployeesByPeriodAndAgeAndPosition(@RequestParam("periodId") long periodId,
+                                                                     @RequestParam("ageId") long ageId,
+                                                                     @RequestParam("position") String position) {
+        return employeeService.findFreeEmployeesByPeriodAndAgeAndPosition(periodId, ageId, position);
+    }
 }

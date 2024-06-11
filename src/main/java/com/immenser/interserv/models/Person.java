@@ -1,13 +1,13 @@
 package com.immenser.interserv.models;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.MappedSuperclass;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.sql.Date;
 
 @MappedSuperclass
 @Setter
@@ -20,4 +20,7 @@ public abstract class Person {
     private long id;
     private String name;
     private String surname;
+    private String patronymic;
+    private Date birthday;
+
 }

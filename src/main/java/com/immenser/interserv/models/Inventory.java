@@ -21,7 +21,7 @@ public class Inventory {
 //    @Size(min = 3, max = 30, message = "В названии должно быть не менее 3 и не более 30 символов")
     private String name;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne()
     @JoinColumn(name = "child_id", nullable = false)
     private Child child;
 

@@ -1,10 +1,8 @@
 package com.immenser.interserv.controllers;
 
-import com.immenser.interserv.models.Child;
+import com.immenser.interserv.models.Group;
 import com.immenser.interserv.services.GroupService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,16 +11,26 @@ import java.util.List;
 @RequestMapping("/groups")
 @RequiredArgsConstructor
 public class GroupController {
+
     private final GroupService groupService;
 
-//    @PostMapping("/add")
-//    public ResponseEntity<HttpStatus> addProduct(@RequestBody AddProductRequest request) {
-//        groupService.addProduct(request);
-//        return ResponseEntity.ok(HttpStatus.OK);
-//    }
+    @PostMapping
+    public  void addGroup(@RequestBody Group group){
+        groupService.addGroup(group);
+    }
 
-//    @GetMapping("/{userId}")
-//    public List<Child> find(@PathVariable Long userId) {
-//        return groupService.find(userId).getChildren();
-//    }
+    @GetMapping
+    public List<Group> getGroupsByPeriod(@RequestParam("periodId") long periodId){
+        return groupService.findGroupsByPeriod(periodId);
+    }
+
+    @GetMapping("/child_group")
+    public Group getGroupByChildAndPeriod(@RequestParam("childId") long childId, @RequestParam("periodId") long periodId){
+        return groupService.findGroupByChildAndPeriod(childId, periodId);
+    }
+
+    @GetMapping("/age_groups")
+    public List<Group> getGroupsByPeriodAndAge(@RequestParam("periodId") long periodId, @RequestParam("ageId") long ageId){
+        return groupService.findGroupsByPeriodAndAge(periodId, ageId);
+    }
 }

@@ -20,19 +20,17 @@ public class Game {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name;
-//    private boolean young;
-//    private boolean middle;
-//    private boolean old;
     private int hoursdur;
     private int minsdur;
     private String inventory;
     private String description;
     private String legend;
+    private String safety;
     private String modification;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @JsonIgnore
+    @ManyToMany()
     @JoinTable(name = "game_age",
             joinColumns = @JoinColumn(name = "game_id"),
             inverseJoinColumns = @JoinColumn(name = "age_id")
@@ -41,9 +39,4 @@ public class Game {
 
     @ManyToMany(fetch = FetchType.EAGER, mappedBy = "games")
     private List<Type> types;
-
-
-
-
-
 }

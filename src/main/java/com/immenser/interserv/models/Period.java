@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.sql.Date;
 import java.util.List;
 
 @Entity
@@ -18,10 +19,16 @@ public class Period {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    private Date start_date;
+    private int duration;
+    private int young;
+    private int middle;
+    private int old;
+    private int price;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "period")
-    private List<ChildPeriod> tickets;
+    @OneToMany(mappedBy = "period")
+    private List<Ticket> tickets;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "period")
-    private List<EmployeePeriod> appointments;
+    @OneToMany(mappedBy = "period")
+    private List<Job> jobs;
 }

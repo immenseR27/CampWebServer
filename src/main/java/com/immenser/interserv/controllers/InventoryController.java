@@ -10,52 +10,33 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.LinkedList;
+import java.util.List;
+
 @RestController
 @RequestMapping("/inventory")
 @RequiredArgsConstructor
 public class InventoryController {
+
     private final InventoryService inventoryService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<Inventory> findInventory(@PathVariable("id") Long id) {
-        Inventory inventory = inventoryService.findInventory(id);
-        return ResponseEntity.ok(inventory);
+    public Inventory findInventory(@PathVariable("id") long id){
+        return inventoryService.findInventory(id);
     }
 
-//    @GetMapping("/{id}")
-//    public ResponseEntity<Inventory> findInventory(@PathVariable("id") Long id, Model model) {
-//        return null;
-//    }
+    @PatchMapping("/{id}/set")
+    public void setOwner(@PathVariable("id") long id, @RequestBody long childId){
+        inventoryService.setOwner(id, childId);
+    }
 
-//    @GetMapping("/new")
-//    public String newInventory(Model model) {
-//        return null;
-//    }
-//
-//    @PostMapping()
-//    public String create(@ModelAttribute("inventory") @Valid Inventory inventory, BindingResult bindingResult) {
-//        if (bindingResult.hasErrors()) {
-//            return null;
-//        }
-//        return null;
-//    }
-//
-//    @GetMapping("/{id}/edit")
-//    public String edit(@PathVariable("id") Long id, Model model) {
-//        return null;
-//    }
-//
-//    @PatchMapping("/{id}")
-//    public String update(@ModelAttribute("inventory") @Valid Inventory inventory, BindingResult bindingResult,
-//                         @PathVariable("id") Long id) {
-//        if (bindingResult.hasErrors()){
-//            return null;
-//        }
-//        return null;
-//    }
-//
-//    @DeleteMapping("/{id}")
-//    public String delete(@PathVariable("id") Long id) {
-//        return null;
-//    }
+    @PatchMapping("/{id}/reset")
+    public void resetOwner(@PathVariable("id") long id){
+        inventoryService.resetOwner(id);
+    }
+
+    @GetMapping
+    public List<Inventory> findInventoryByChild(@RequestParam("childId") long childId){
+        return inventoryService.findInventoryByChild(childId);
+    }
 }

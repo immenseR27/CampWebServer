@@ -17,21 +17,18 @@ public class Group {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
     private int number;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne()
     @JoinColumn(name = "age_id")
     private Age age;
 
-    @OneToOne(fetch = FetchType.EAGER, mappedBy = "group")
-    private ChildPeriod childPeriod;
+    @OneToMany(mappedBy = "group")
+    private List<Ticket> tickets;
 
-    @OneToOne(fetch = FetchType.EAGER, mappedBy = "group")
-    private EmployeePeriod employeePeriod;
+    @OneToMany(mappedBy = "group")
+    private List<Job> jobs;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "group")
-    private List<GroupActivity> activities;
-
-
+    @OneToMany(mappedBy = "group")
+    private List<Event> activities;
 }

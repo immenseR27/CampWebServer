@@ -11,17 +11,21 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "group_activity")
-public class GroupActivity {
+@Table(name = "employee_period")
+public class Job {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne()
+    @JoinColumn(name = "employee_id")
+    private Employee employee;
+
+    @ManyToOne()
+    @JoinColumn(name = "period_id")
+    private Period period;
+
+    @ManyToOne()
     @JoinColumn(name = "group_id")
     private Group group;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "activity_id")
-    private Activity activity;
 }

@@ -19,16 +19,17 @@ public class Age {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    String name;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "age")
+    @OneToMany(mappedBy = "age")
     private List<Group> groups;
 
-    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "ages")
+    @ManyToMany(mappedBy = "ages")
     private List<Game> games;
 
-    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "ages")
+    @ManyToMany(mappedBy = "ages")
     private List<Game> activities;
 
-    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "ages")
+    @ManyToMany(mappedBy = "ages")
     private List<Employee> employees;
 }

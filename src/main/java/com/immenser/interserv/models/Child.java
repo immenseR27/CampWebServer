@@ -1,6 +1,6 @@
 package com.immenser.interserv.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import jakarta.persistence.*;
@@ -21,14 +21,17 @@ import java.util.List;
 @Table(name = "child")
 public class Child extends Person {
 
-    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "children")
+    @JsonIgnore
+    @ManyToMany(mappedBy = "children")
     List<Parent> parents;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "child")
-    private List<ChildPeriod> tickets;
+    @JsonIgnore
+    @OneToMany(mappedBy = "child")
+    private List<Ticket> tickets;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "child")
-    List<Inventory> inventory;
+    @JsonIgnore
+    @OneToMany(mappedBy = "child")
+    private List<Inventory> inventory;
 
     private String image;
 

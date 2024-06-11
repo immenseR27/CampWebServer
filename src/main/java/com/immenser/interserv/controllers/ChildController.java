@@ -14,19 +14,19 @@ public class ChildController {
 
     private final ChildService childService;
 
-    @GetMapping
-    public List<Child> findAll() {
-        return childService.findAll();
+    @GetMapping("/group_list")
+    List<Child> findChildrenByGroup(@RequestParam("groupId") long groupId) {
+        return childService.findChildrenByGroup(groupId);
     }
 
-//    @GetMapping("/{id}")
-//    public List<Child> findByUser(@PathVariable Long id) {
-//        return childService.findByUser(id);
-//    }
+    @GetMapping("/period_list")
+    List<Child> findChildrenByPeriod(@RequestParam("periodId") long periodId) {
+        return childService.findChildrenByPeriod(periodId);
+    }
 
-//    @GetMapping("/{id}")
-//    public Child findChild(@PathVariable Long id) {
-//        return childService.findChild(id);
-//    }
+    @GetMapping("/my_group")
+    List<Child> findChildrenByEmployee(@RequestParam("employeeId") long employeeId) {
+        return childService.findChildrenByEmployee(employeeId);
+    }
 
 }

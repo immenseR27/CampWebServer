@@ -18,11 +18,12 @@ public class Employee extends Person{
 
     private String email;
     private String password;
+    private String position;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "employee")
-    private List<EmployeePeriod> appointments;
+    @OneToMany(mappedBy = "employee")
+    private List<Job> jobs;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany()
     @JoinTable(name = "employee_age",
             joinColumns = @JoinColumn(name = "employee_id"),
             inverseJoinColumns = @JoinColumn(name = "age_id")
